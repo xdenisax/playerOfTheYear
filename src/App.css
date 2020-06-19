@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+html{
+  background-color: #006d77;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+.imageBackground{
+  height: 85vh;
+  width: 100vw;
+  
+  
+  overflow: hidden;
+
+  background-image: url("images/logInBkg.jpg");
+  background-size: cover; 
+  background-position: center center;
+
+  border-bottom:  5px solid #004950;
+  border-radius: 0em 0em 4em 4em;
+}
+
+.footer{
+  display: flex;
+  justify-content:space-around ;
+}
+
+.signInButton, .signUpButton{
+  border: none;
+  background: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5em;
+  color: #D7D6D6;
+}
