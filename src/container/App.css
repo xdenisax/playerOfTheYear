@@ -17,7 +17,7 @@ html{
   
   overflow: hidden;
 
-  background-image: url("images/logInBkg.jpg");
+  background-image: url("../images/logInBkg.jpg");
   background-size: cover; 
   background-position: center center;
 
@@ -28,6 +28,7 @@ html{
 .footer{
   display: flex;
   justify-content:space-around ;
+  margin-top: 1em;
 }
 
 .signInButton, .signUpButton{
