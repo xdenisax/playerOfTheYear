@@ -1,17 +1,21 @@
 import {db} from './firebaseConfig';
 
 export const addUser = (user) => {
-    console.log(user)
-    db.collection("users").doc(user.email).set({
+    let severity = "";
+    db
+    .collection("users")
+    .doc(user.email)
+    .set({
         email: user.email,
         password: user.password
     })
     .then(function(docRef) {
-        console.log("Document written", );
+        severity = "success";
     })
     .catch(function(error) {
-        console.error("Error adding document: ", error);
+        severity = "error";
     });
+    return severity;
 }
 
 

@@ -64,7 +64,7 @@ class SignInForm extends React.Component {
   render (){
     return(
       
-      <div className="formInputs fl w-25 flex flex-column ma4 ba"
+      <div className="formInputs fl w-25 flex flex-column items-start ma6"
       style={{formInputsStyle}}>
         <p 
           className="ma1 f3 mb3"
@@ -94,7 +94,7 @@ class SignInForm extends React.Component {
         </div>
         </div>
         
-        <div className="mt2" >
+        <div className="mt2 ml1 " >
           <Button 
             variant="outlined" 
             size="small" 

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../container/App.css';
-import {TextField, Button} from '@material-ui/core';
+import {TextField, Button, Snackbar} from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import 'tachyons';
 import {addUser} from '../firebase/userFunctions';
 
@@ -31,6 +32,10 @@ let validateLength = (input) => {
   return input.length > 5;
 }
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 class SignUpForm extends React.Component {
     constructor(){
         super();
@@ -40,7 +45,9 @@ class SignUpForm extends React.Component {
             confirmedPassword:"",
             emailError:false,
             passwordError:false,
-            confirmedPasswordError:false
+            confirmedPasswordError:false,
+            severity: "", 
+            snackbarMessage:""
         }
     }
 
@@ -70,24 +77,19 @@ class SignUpForm extends React.Component {
 
     saveToDataBase = () =>{
       if(!validateLength(this.state.email)){
-        console.log("email length not right.");
-        this.setState({emailError:true});
+        this.setState({emailError:true, severity:"error", snackbarMessage: "Email does not have a proper length."});
       }
       if(!validateEmail(this.state.email)){
-        console.log("mail not valid");
-        this.setState({emailError:true});
+        this.setState({emailError:true, severity:"error", snackbarMessage: "Email does not have a proper format."});
       }
       if(!validateLength(this.state.password)){
-        console.log("password length not right");
-        this.setState({passwordError:true});
+        this.setState({passwordError:true, severity:"error", snackbarMessage: "Password does not have a proper length."});
       }
       if(!validateLength(this.state.confirmedPassword)){
-        console.log("confirmed pass length !right;")
-        this.setState({confirmedPassword:true});
+        this.setState({confirmedPassword:true, severity:"error", snackbarMessage: "Confirmation password does not have a proper length."});
       }
       if(this.state.password!==this.state.confirmedPassword){
-        console.log("pass not same");
-        this.setState({passwordError:true, confirmedPassword:true});
+        this.setState({passwordError:true, confirmedPassword:true, severity:"error", snackbarMessage: "Passwords does not match."});
       }
       if(validateLength(this.state.email)
         && validateEmail(this.state.email)
@@ -98,64 +100,82 @@ class SignUpForm extends React.Component {
             email: this.state.email,
             password: this.state.password
           }
-          addUser(user);
+          let successCode = addUser(user);
+          console.log(successCode)
+          successCode === 'success'
+          ? this.setState({severity:successCode, snackbarMessage: "Account created successfully."})
+          : this.setState({severity:successCode, snackbarMessage: "Error occured while creating the new account."})
         }
     }
 
+
   render (){
     return(
-      
-        <div className="formInputs fl w-25 flex flex-column ma4"> 
+      <div className="flex flex-column items-end w-100 " >
+        <div className="formInputs fl w-25 flex flex-column items-end ma6"> 
             <p 
             className="ma1 f3 mb3"
             style={titleStyle}> 
             Sign Up
             </p>
 
-            <div className="w-100">
-            <div className="ma1">
-            <TextField
-                id="outlined-password-input"
-                label="email"
-                type="email"
-                variant="outlined"
-                error={this.state.errorEmail}
-                onChange={(e) => this.onEmailChange(e)}/>
-            </div>
+            <div className="w-100 flex flex-column items-end">
+              <div className="ma1">
+                <TextField
+                    id="outlined-password-input"
+                    label="email"
+                    type="email"
+                    variant="outlined"
+                    error={this.state.errorEmail}
+                    onChange={(e) => this.onEmailChange(e)}/>
+              </div>
 
-            <div className="ma1">
-            <TextField
-                id="outlined-password-input"
-                label="password"
-                type="password"
-                variant="outlined"
-                error={this.state.errorPassword}
-                onChange={(e) => this.onPasswordChange(e)}/>
-            </div>
+              <div className="ma1">
+                <TextField
+                    id="outlined-password-input"
+                    label="password"
+                    type="password"
+                    variant="outlined"
+                    error={this.state.errorPassword}
+                    onChange={(e) => this.onPasswordChange(e)}/>
+              </div>
 
-            <div className="ma1">
-            <TextField
-                id="outlined-password-input"
-                label="confirm password"
-                type="password"
-                variant="outlined"
-                error={this.state.errorConfirmedPassword}
-                onChange={(e) => this.onConfirmedPasswordChange(e)}
-                />
-            </div>
+              <div className="ma1">
+                <TextField
+                    id="outlined-password-input"
+                    label="confirm password"
+                    type="password"
+                    variant="outlined"
+                    error={this.state.errorConfirmedPassword}
+                    onChange={(e) => this.onConfirmedPasswordChange(e)}
+                    />
+              </div>
             </div>
             
-            <div className="mt2 ml1" 
+            <div className="mt2 mr1" 
             style={buttonWrapperStyle}>
-            <Button 
-                variant="outlined" 
-                size="small" 
-                style={buttonStyle}
-                onClick = {() => this.saveToDataBase()}>
-                Sign Up
-            </Button>
+              <Button 
+                  variant="outlined" 
+                  size="small" 
+                  style={buttonStyle}
+                  onClick = {() => this.saveToDataBase()}>
+                  Sign Up
+              </Button>
             </div>
+        </div>
         
+        <div className="flex items-center">
+          <Snackbar  autoHideDuration={6000}></Snackbar>
+          {this.state.severity!="" 
+            ? this.state.severity=="success" 
+              ? <Alert severity="success">This is a success message!</Alert> 
+              : this.state.severity == "error"
+                ?  <Alert severity="error">{this.state.snackbarMessage}</Alert>
+                : ""
+            :""
+          }
+         
+        </div>
         
       </div>
     );
