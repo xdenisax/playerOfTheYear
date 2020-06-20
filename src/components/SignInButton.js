@@ -9,6 +9,7 @@ class SignInButton extends React.Component {
     return(
         <div className = "mt-5">
             <Button 
+            onClick={()=>this.props.onSubmit("SignIn")}
             variant="contained" 
             style={{
               "fontFamily": `'Montserrat', sans-serif`,

@@ -31,10 +31,6 @@ html{
   margin-top: 1em;
 }
 
-.signInButton, .signUpButton{
-  border: none;
-  background: none;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.5em;
-  color: #D7D6D6;
+.formInputs{
+  /* background-color: blue; */
 }

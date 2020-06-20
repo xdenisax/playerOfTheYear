@@ -15,6 +15,7 @@ class SignUpButton extends React.Component {
   render (){
     return(
           <Button 
+            onClick = {() => this.props.onSubmit("SignUp")}
             variant="contained"
             style={signUpButtonStyle}
             endIcon={
