@@ -2,6 +2,7 @@ import React from 'react';
 import '../container/App.css';
 import {TextField, Button} from '@material-ui/core';
 import 'tachyons';
+import {addUser} from '../firebase/userFunctions';
 
 var buttonStyle= {
   "fontFamily": `'Montserrat', sans-serif`,
@@ -26,6 +27,10 @@ let validateEmail = (email) => {
     return email.match(re);
 }
 
+let validateLength = (input) => {
+  return input.length > 5;
+}
+
 class SignUpForm extends React.Component {
     constructor(){
         super();
@@ -40,8 +45,7 @@ class SignUpForm extends React.Component {
     }
 
     onEmailChange = (event) =>{
-        if(event.target.value.length<5  || !validateEmail(event.target.value)){
-          console.log(event.target.value.length)
+        if(!validateLength(event.target.value)  || !validateEmail(event.target.value)){
           this.setState({email: event.target.value, errorEmail:true});
         }else{
           this.setState({email: event.target.value, errorEmail:false});
@@ -49,7 +53,7 @@ class SignUpForm extends React.Component {
     }
 
     onPasswordChange = (event) =>{
-        if(event.target.value.length<5){
+        if(!validateLength(event.target.value)){
           this.setState({password: event.target.value, errorPassword:true});
         }else{
           this.setState({password: event.target.value, errorPassword:false});
@@ -57,10 +61,44 @@ class SignUpForm extends React.Component {
     }
 
     onConfirmedPasswordChange = (event) =>{
-        if(event.target.value.length<5 ){
+        if(!validateLength(event.target.value)){
           this.setState({confirmedPassword: event.target.value, errorConfirmedPassword:true});
         }else{
           this.setState({confirmedPassword: event.target.value, errorConfirmedPassword:false});
+        }
+    }
+
+    saveToDataBase = () =>{
+      if(!validateLength(this.state.email)){
+        console.log("email length not right.");
+        this.setState({emailError:true});
+      }
+      if(!validateEmail(this.state.email)){
+        console.log("mail not valid");
+        this.setState({emailError:true});
+      }
+      if(!validateLength(this.state.password)){
+        console.log("password length not right");
+        this.setState({passwordError:true});
+      }
+      if(!validateLength(this.state.confirmedPassword)){
+        console.log("confirmed pass length !right;")
+        this.setState({confirmedPassword:true});
+      }
+      if(this.state.password!==this.state.confirmedPassword){
+        console.log("pass not same");
+        this.setState({passwordError:true, confirmedPassword:true});
+      }
+      if(validateLength(this.state.email)
+        && validateEmail(this.state.email)
+        && validateLength(this.state.password)
+        && validateLength(this.state.confirmedPassword)
+        && this.state.password===this.state.confirmedPassword){
+          let user = {
+            email: this.state.email,
+            password: this.state.password
+          }
+          addUser(user);
         }
     }
 
@@ -112,8 +150,9 @@ class SignUpForm extends React.Component {
             <Button 
                 variant="outlined" 
                 size="small" 
-                style={buttonStyle}>
-                Log In
+                style={buttonStyle}
+                onClick = {() => this.saveToDataBase()}>
+                Sign Up
             </Button>
             </div>
         
