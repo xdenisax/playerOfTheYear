@@ -45,7 +45,6 @@ class SignUpForm extends React.Component {
             confirmedPassword:"",
             emailError:false,
             passwordError:false,
-            confirmedPasswordError:false,
             severity: "", 
             snackbarMessage:""
         }
@@ -61,21 +60,13 @@ class SignUpForm extends React.Component {
 
     onPasswordChange = (event) =>{
         if(!validateLength(event.target.value)){
-          this.setState({password: event.target.value, errorPassword:true});
+          this.setState({[event.target.id]: event.target.value, errorPassword:true});
         }else{
-          this.setState({password: event.target.value, errorPassword:false});
+          this.setState({[event.target.id]: event.target.value, errorPassword:false});
         }
-    }
+      }
 
-    onConfirmedPasswordChange = (event) =>{
-        if(!validateLength(event.target.value)){
-          this.setState({confirmedPassword: event.target.value, errorConfirmedPassword:true});
-        }else{
-          this.setState({confirmedPassword: event.target.value, errorConfirmedPassword:false});
-        }
-    }
-
-    saveToDataBase = () =>{
+    saveToDataBase = async () =>{
       if(!validateLength(this.state.email)){
         this.setState({emailError:true, severity:"error", snackbarMessage: "Email does not have a proper length."});
       }
@@ -85,11 +76,8 @@ class SignUpForm extends React.Component {
       if(!validateLength(this.state.password)){
         this.setState({passwordError:true, severity:"error", snackbarMessage: "Password does not have a proper length."});
       }
-      if(!validateLength(this.state.confirmedPassword)){
-        this.setState({confirmedPassword:true, severity:"error", snackbarMessage: "Confirmation password does not have a proper length."});
-      }
       if(this.state.password!==this.state.confirmedPassword){
-        this.setState({passwordError:true, confirmedPassword:true, severity:"error", snackbarMessage: "Passwords does not match."});
+        this.setState({passwordError:true, confirmedPassword:true, severity:"error", snackbarMessage: "Passwords do not match."});
       }
       if(validateLength(this.state.email)
         && validateEmail(this.state.email)
@@ -100,7 +88,8 @@ class SignUpForm extends React.Component {
             email: this.state.email,
             password: this.state.password
           }
-          let successCode = addUser(user);
+
+          let successCode = await addUser(user);
           console.log(successCode)
           successCode === 'success'
           ? this.setState({severity:successCode, snackbarMessage: "Account created successfully."})
@@ -114,9 +103,9 @@ class SignUpForm extends React.Component {
       <div className="flex flex-column items-end w-100 " >
         <div className="formInputs fl w-25 flex flex-column items-end ma6"> 
             <p 
-            className="ma1 f3 mb3"
+            className="ma1 f3 mb4"
             style={titleStyle}> 
-            Sign Up
+            Registration
             </p>
 
             <div className="w-100 flex flex-column items-end">
@@ -132,7 +121,7 @@ class SignUpForm extends React.Component {
 
               <div className="ma1">
                 <TextField
-                    id="outlined-password-input"
+                    id="password"
                     label="password"
                     type="password"
                     variant="outlined"
@@ -142,12 +131,12 @@ class SignUpForm extends React.Component {
 
               <div className="ma1">
                 <TextField
-                    id="outlined-password-input"
+                    id="confirmedPassword"
                     label="confirm password"
                     type="password"
                     variant="outlined"
-                    error={this.state.errorConfirmedPassword}
-                    onChange={(e) => this.onConfirmedPasswordChange(e)}
+                    error={this.state.errorPassword}
+                    onChange={(e) => this.onPasswordChange(e)}
                     />
               </div>
             </div>
@@ -166,10 +155,10 @@ class SignUpForm extends React.Component {
         
         <div className="flex items-center">
           <Snackbar  autoHideDuration={6000}></Snackbar>
-          {this.state.severity!="" 
-            ? this.state.severity=="success" 
+          {this.state.severity!=="" 
+            ? this.state.severity==="success" 
               ? <Alert severity="success">This is a success message!</Alert> 
-              : this.state.severity == "error"
+              : this.state.severity === "error"
                 ?  <Alert severity="error">{this.state.snackbarMessage}</Alert>
                 : ""
             :""

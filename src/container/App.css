@@ -4,7 +4,7 @@ html{
   background-color: #006d77;
 }
 
-.container{
+.landingPageContainer{
   display: flex;
   flex-direction: column;
   align-content: space-between;
@@ -34,3 +34,4 @@ html{
 .formInputs{
   /* background-color: blue; */
 }
+

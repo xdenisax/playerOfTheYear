@@ -1,35 +1,25 @@
 import React from 'react';
 import './App.css';
-import SignInButton from '../components/SignInButton';
-import SignUpButton from '../components/SignUpButton';
-import SignInForm from '../components/SignInForm';
-import SignUpForm from '../components/SignUpForm';
+import NavBar from '../components/layout/Navbar.js';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import Dashboard from '../components/dashboard/Dashboard.js';
+import LandingPage from '../container/LandingPage.js';
+
 
 class App extends React.Component {
-  constructor(){
-    super();
-    this.state={
-      formSelected : 'SignIn'
-    }
-  }
-
-  changeFormSelected = (formType) => {  
-    this.setState({formSelected: formType});
-  }
-
+  
+  
   render (){
+      {/* <NavBar/> */}
+  
     return(
-      <div className="container">
-        <div className="imageBackground flex items-center justify-between">
-          {this.state.formSelected==='SignIn' 
-          ? <SignInForm />
-          : <SignUpForm/>}
-        </div>
-        <div className="footer">
-          <SignInButton onSubmit = {this.changeFormSelected}/> 
-          <SignUpButton onSubmit = {this.changeFormSelected}/>
-        </div>
-      </div>
+      <BrowserRouter>
+          <Switch>
+            <Route path="/" component={LandingPage}/>
+            <Route path="/dashboard" component={Dashboard}/>
+          </Switch>
+      </BrowserRouter>
+      
     );
   }
 }
