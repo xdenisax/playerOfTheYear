@@ -1,8 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
 .transparentBG {
     background-color: rgba(0,0,0,0);
 }
 
 .greenText{
+    font-family: 'Montserrat', sans-serif;
     color: #006d77 !important;
 }
+
+.big{
+    font-size: 2em;
+}
+
+.no-shadows {
+    box-shadow: none!important;
+}
+
+
   

@@ -15,7 +15,7 @@ class App extends React.Component {
     return(
       <BrowserRouter>
           <Switch>
-            <Route path="/" component={LandingPage}/>
+            <Route exact path="/" component={LandingPage}/>
             <Route path="/dashboard" component={Dashboard}/>
           </Switch>
       </BrowserRouter>

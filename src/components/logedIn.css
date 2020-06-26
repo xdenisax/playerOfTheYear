@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+.loggedInScreen{
+    overflow: hidden;
+    background-color: #006d77;
+    background-image: url("../images/loggedInBkg.jpg");
+    background-size: cover; 
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+}
+
+.loggedInCenterScreen{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 90vh;
+
+}
+.centerContainer{
+  border:  1px solid #004950;
+  border-radius: 4em;
+  height: 80vh;
+  width: 85vw;
+  background-color: rgba(240,255,255, 0.4);
+}
+
+
