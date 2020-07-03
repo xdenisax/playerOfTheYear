@@ -1,9 +1,10 @@
 import React from 'react';
-import '../container/App.css';
+import {Link} from 'react-router-dom';
 import {TextField, Button, Snackbar} from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import 'tachyons';
-import {addUser} from '../firebase/userFunctions';
+import "./SignUp.css"
+import {addUser} from '../../firebase/userFunctions';
 
 var buttonStyle= {
   "fontFamily": `'Montserrat', sans-serif`,
@@ -12,15 +13,6 @@ var buttonStyle= {
   "background":"none",
   "borderColor":"#006d77",
   "float":'left'
-}
-
-var buttonWrapperStyle = { 
-  "position" : "relative"
-}
-
-var titleStyle = {
-  "fontFamily": `'Montserrat', sans-serif`,
-  "color":"#006d77"
 }
 
 let validateEmail = (email) => {
@@ -40,31 +32,21 @@ class SignUpForm extends React.Component {
     constructor(){
         super();
         this.state = {
+            firstName:"",
             email:"",
             password:"",
             confirmedPassword:"",
-            emailError:false,
-            passwordError:false,
-            severity: "", 
-            snackbarMessage:""
+
+            error:{
+              firstName: false,
+              email: false,
+              password: false,
+              confirmedPassword: false,
+              severity: "", 
+              snackbarMessage:""
+          }
         }
     }
-
-    onEmailChange = (event) =>{
-        if(!validateLength(event.target.value)  || !validateEmail(event.target.value)){
-          this.setState({email: event.target.value, errorEmail:true});
-        }else{
-          this.setState({email: event.target.value, errorEmail:false});
-        }
-    }
-
-    onPasswordChange = (event) =>{
-        if(!validateLength(event.target.value)){
-          this.setState({[event.target.id]: event.target.value, errorPassword:true});
-        }else{
-          this.setState({[event.target.id]: event.target.value, errorPassword:false});
-        }
-      }
 
     saveToDataBase = async () =>{
       if(!validateLength(this.state.email)){
@@ -97,26 +79,81 @@ class SignUpForm extends React.Component {
         }
     }
 
+    validateInput = (e) => {
+      if(e.target.id =='email' && !validateEmail(e.target.value)){
+        this.setState({error:{...this.state.error, email:true, snackbarMessage: 'Invalid email.', severity:"error"}});
+        return false;
+      }
+    
+      if(!validateLength(e.target.value)){
+        if(e.target.id === 'firstName'){
+          this.setState({error: {...this.state.error,  firstName:true, snackbarMessage: 'Name not long enough.', severity:"error"}});
+        }
+        
+        if(e.target.id === 'password'){
+          this.setState({error: {...this.state.error, password:true, snackbarMessage: 'Password not long enough.', severity:"error"}});
+        }
+        
+        if(e.target.id === 'confirmedPassword'){
+          this.setState({error: { ...this.state.error, confirmedPassword: true, snackbarMessage: 'Confirmation password not lon enough.', severity:"error"}});
+        }
+
+        return false;
+      }
+
+      if( e.target.id === 'confirmedPassword' && e.target.value != this.state.password){
+        this.setState({error: {...this.state.error, confirmedPassword: true, snackbarMessage: "Passwords don't match", severity:"error"}});
+        return false;
+      }
+      
+      return true;
+    }
+
+    handleSubmit = (e) =>{
+      console.log(this.state);
+    }
+
+    handleChange = (e) => {
+      if( this.validateInput(e)){
+        this.setState({
+          [e.target.id] : e.target.value,
+          error: {
+            ...this.state.error,
+            [e.target.id]: false,
+            severity:"",
+            snackbarMessage:""
+          }
+        });
+      }
+    }
 
   render (){
     return(
       <div className="flex flex-column items-end w-100 " >
         <div className="formInputs fl w-25 flex flex-column items-end ma6"> 
-            <p 
-            className="ma1 f3 mb4"
-            style={titleStyle}> 
-            Registration
-            </p>
+        
+            <p className="ma1 f3 mb4 titleStyle"> Registration </p>
 
             <div className="w-100 flex flex-column items-end">
+              
               <div className="ma1">
                 <TextField
-                    id="outlined-password-input"
+                    id="firstName"
+                    label="name"
+                    type="text"
+                    variant="outlined"
+                    error={this.state.error.firstName}
+                    onChange={(e) => this.handleChange(e)}/>
+              </div>
+
+              <div className="ma1">
+                <TextField
+                    id="email"
                     label="email"
                     type="email"
                     variant="outlined"
-                    error={this.state.errorEmail}
-                    onChange={(e) => this.onEmailChange(e)}/>
+                    error={this.state.error.email}
+                    onChange={(e) => this.handleChange(e)}/>
               </div>
 
               <div className="ma1">
@@ -125,8 +162,8 @@ class SignUpForm extends React.Component {
                     label="password"
                     type="password"
                     variant="outlined"
-                    error={this.state.errorPassword}
-                    onChange={(e) => this.onPasswordChange(e)}/>
+                    error={this.state.error.password}
+                    onChange={(e) => this.handleChange(e)}/>
               </div>
 
               <div className="ma1">
@@ -135,32 +172,30 @@ class SignUpForm extends React.Component {
                     label="confirm password"
                     type="password"
                     variant="outlined"
-                    error={this.state.errorPassword}
-                    onChange={(e) => this.onPasswordChange(e)}
+                    error={this.state.error.confirmedPassword}
+                    onChange={(e) => this.handleChange(e)}
                     />
               </div>
             </div>
             
-            <div className="mt2 mr1" 
-            style={buttonWrapperStyle}>
-              <Button 
-                  variant="outlined" 
-                  size="small" 
-                  style={buttonStyle}
-                  onClick = {() => this.saveToDataBase()}>
-                  Sign Up
-              </Button>
+            <div className="mt2 mr1 buttonWrapperStyle">
+              <Link to="/">
+                <Button 
+                    onClick={this.handleSubmit}
+                    variant="outlined" 
+                    size="small" 
+                    style={buttonStyle}
+                    >
+                    Sign Up
+                </Button>
+              </Link>
             </div>
         </div>
         
         <div className="flex items-center">
           <Snackbar  autoHideDuration={6000}></Snackbar>
-          {this.state.severity!=="" 
-            ? this.state.severity==="success" 
-              ? <Alert severity="success">This is a success message!</Alert> 
-              : this.state.severity === "error"
-                ?  <Alert severity="error">{this.state.snackbarMessage}</Alert>
-                : ""
+          {this.state.error.severity === "error" 
+            ? <Alert  severity="error">{this.state.error.snackbarMessage}</Alert>
             :""
           }
          

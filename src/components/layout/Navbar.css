@@ -1,12 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
-
 .transparentBG {
     background-color: rgba(0,0,0,0);
 }
 
 .greenText{
-    font-family: 'Montserrat', sans-serif;
     color: #006d77 !important;
+}
+
+.burgundyText{
+    color: #843B62 !important;
 }
 
 .big{

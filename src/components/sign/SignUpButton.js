@@ -1,7 +1,6 @@
 import React from 'react';
-import '../container/App.css';
 import {Button, Icon} from '@material-ui/core';
-import Balloon from "../images/balloon.svg";
+import Balloon from "../../images/balloon.svg";
 
 const signUpButtonStyle ={ 
     "fontFamily": `'Montserrat', sans-serif`,
@@ -15,7 +14,7 @@ class SignUpButton extends React.Component {
   render (){
     return(
           <Button 
-            onClick = {() => this.props.onSubmit("SignUp")}
+            onClick={ () => this.props.onSubmit("SignUp")}
             variant="contained"
             style={signUpButtonStyle}
             endIcon={
@@ -28,7 +27,8 @@ class SignUpButton extends React.Component {
                   alt="">
                 </img>
               </Icon>  }> 
-            Sign Up</Button>
+            Sign Up
+          </Button>
     );
   }
 }
