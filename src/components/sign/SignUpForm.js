@@ -80,7 +80,7 @@ class SignUpForm extends React.Component {
     }
 
     validateInput = (e) => {
-      if(e.target.id =='email' && !validateEmail(e.target.value)){
+      if(e.target.id === 'email' && !validateEmail(e.target.value)){
         this.setState({error:{...this.state.error, email:true, snackbarMessage: 'Invalid email.', severity:"error"}});
         return false;
       }
@@ -101,7 +101,7 @@ class SignUpForm extends React.Component {
         return false;
       }
 
-      if( e.target.id === 'confirmedPassword' && e.target.value != this.state.password){
+      if( e.target.id === 'confirmedPassword' && e.target.value !== this.state.password){
         this.setState({error: {...this.state.error, confirmedPassword: true, snackbarMessage: "Passwords don't match", severity:"error"}});
         return false;
       }

@@ -3,15 +3,20 @@ import MatchesDetails from "./MatchDetails.js";
 
 
 
-const MatchesList = () => {
+const MatchesList = ({matches}) => {
+    console.log("&&&&&&&" + matches)
     return(
         <div className="matches-list section w-50" >
-           <MatchesDetails/>
-           <MatchesDetails/>
-           <MatchesDetails/>
-           <MatchesDetails/>
-           <MatchesDetails/>
-           <MatchesDetails/>
+           {
+            matches !== undefined 
+            ?  matches.map(match => {
+                console.log(match + "////")
+                return (
+                    <MatchesDetails match = {match} key={match.id}/>
+                )
+            })
+            : <h3>Nu exista</h3>
+           }
         </div>
     );
 }

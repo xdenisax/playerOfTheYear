@@ -3,13 +3,12 @@
     position: relative;
 }
   
-.inputsStyle{
-    float:right;
+.float-left{
+    float: left;
 }
   
 .titleStyle{
     font-family: 'Montserrat', sans-serif;
     color: #006d77;
-    float:right;
 }
   

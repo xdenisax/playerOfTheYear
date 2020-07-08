@@ -10,7 +10,7 @@ var buttonStyle = {
   "color": "#006d77",
   "background":"none",
   "borderColor":"#006d77",
-  "float":"right"
+  "float":"left"
 }
 
 
@@ -60,8 +60,7 @@ class SignInForm extends React.Component {
   render (){
     return(
       
-      <div className="formInputs fl w-25 flex flex-column items-start ma6 form inputsStyle">
-        <form  >
+      <div className="formInputsStyle float-left fl w-25 flex flex-column items-start ma6 form ">
           
           <p className="ma1 f3 mb3 titleStyle"> Sign In </p>
 
@@ -100,7 +99,6 @@ class SignInForm extends React.Component {
             </Link>
             
           </div>
-        </form>
         
       </div>
     );
