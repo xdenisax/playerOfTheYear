@@ -1,5 +1,3 @@
-import { get } from "jquery"
-
 export const createMatch = (match) => {
     return (dispatch, getState, { getFirebase, getFirestore}) => {
         const firestore = getFirestore();

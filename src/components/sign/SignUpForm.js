@@ -4,7 +4,6 @@ import {TextField, Button, Snackbar} from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import 'tachyons';
 import "./SignUp.css"
-import {addUser} from '../../firebase/userFunctions';
 
 var buttonStyle= {
   "fontFamily": `'Montserrat', sans-serif`,
@@ -71,11 +70,6 @@ class SignUpForm extends React.Component {
             password: this.state.password
           }
 
-          let successCode = await addUser(user);
-          console.log(successCode)
-          successCode === 'success'
-          ? this.setState({severity:successCode, snackbarMessage: "Account created successfully."})
-          : this.setState({severity:successCode, snackbarMessage: "Error occured while creating the new account."})
         }
     }
 

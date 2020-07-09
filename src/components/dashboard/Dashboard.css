@@ -3,5 +3,5 @@
 }
 
 .overflow{
-    overflow: auto;
+    overflow-y: auto;
 }

@@ -4,19 +4,15 @@ import MatchesDetails from "./MatchDetails.js";
 
 
 const MatchesList = ({matches}) => {
-    console.log("&&&&&&&" + matches)
     return(
-        <div className="matches-list section w-50" >
+        <div className="matches-list " >
            {
-            matches !== undefined 
-            ?  matches.map(match => {
-                console.log(match + "////")
-                return (
-                    <MatchesDetails match = {match} key={match.id}/>
-                )
-            })
-            : <h3>Nu exista</h3>
-           }
+            matches
+            ? matches.map(match => {
+                return (<MatchesDetails match = {match} key={match.id}/>)
+             })
+            : <h4 className="montSerrat greenText ma2 pa1">No matches yet..</h4>
+            }
         </div>
     );
 }

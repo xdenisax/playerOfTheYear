@@ -1,29 +1,30 @@
 import React, {Component} from 'react';
 import MatchesList from "../matches/MatchesList.js";
-import MatchForm from "../matches/MatchForm.js";
+import MatchForm from "../matches/form/MatchForm.js";
 import NavBar from '../layout/Navbar.js';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 import '../logedIn.css';
 import './Dashboard.css';
 
 class Dashboard extends Component{
     render(){
-        const { matches } = this.props;
+        const { matches, auth } = this.props;
 
+        if(!auth.uid) return <Redirect to ='/'/>
         return(
             <div className="loggedInScreen">
                 <NavBar/>
                 <div className="loggedInCenterScreen">
-                    <div className=" pa2 centerContainer max-height-100 overflow">
-                        <div className="row">
-                            <div className="w-50">
-                                <MatchesList matches = {matches}  className="w-50"/>
-                                <MatchForm/>
+                    <div className=" pa2 centerContainer container">
+                        <div className="flex flex-row items-start justify-between">
+                            <div className="max-height-100 overflow w-40">
+                                <MatchesList matches = {matches}  />
                             </div>
-                            <div className="col s12 m6 offset-m1">
-                                {/* <Notifications/> */}
+                            <div className="flex content-start w-40">
+                                <MatchForm/>
                             </div>
                         </div>
                     </div>
@@ -34,14 +35,15 @@ class Dashboard extends Component{
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
-        matches: state.firestore.data.matches
+        matches: state.firestore.ordered.matches,
+        auth: state.firebase.auth
     }
 }
+
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        { collection: "matches" }
+        { collection: 'matches' }
     ])
  )(Dashboard);

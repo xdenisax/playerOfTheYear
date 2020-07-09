@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import "./SignIn.css"
 import {TextField, Button} from '@material-ui/core';
 import 'tachyons';
+import { connect } from 'react-redux';
+import { signIn } from '../../store/actions/authActions.js';
 
 var buttonStyle = {
   "fontFamilt": `'Montserrat', sans-serif`,
@@ -14,39 +16,13 @@ var buttonStyle = {
 }
 
 
-let validateEmail = (email) => {
-  const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  return email.match(re);
-}
-
-
 class SignInForm extends React.Component {
-  constructor(){
-    super(); 
-    this.state = {
-      email : "", 
-      password : "",
-      errorEmail: false, 
-      errorPassword: false
-    }
-  }
 
-  onEmailChange = (event) => { 
-    if(event.target.value.length<5  || !validateEmail(event.target.value)){
-      console.log(event.target.value.length)
-      this.setState({email: event.target.value, errorEmail:true});
-    }else{
-      this.setState({email: event.target.value, errorEmail:false});
-    }
+  state = {
+    email : "", 
+    password : ""
   }
-
-  onPasswordChange = (event) => { 
-    if(event.target.value.length<5){
-      this.setState({password: event.target.value, errorPassword: true});
-    }else{
-      this.setState({password: event.target.value, errorPassword: false});
-    }
-  }
+  
 
   handleChange = (e) => {
     this.setState({[e.target.id] : e.target.value});
@@ -54,7 +30,7 @@ class SignInForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.signIn(this.state);
   }
 
   render (){
@@ -87,17 +63,15 @@ class SignInForm extends React.Component {
           </div>
           
           <div className="mt2 ml1" >
-            <Link to="/dashboard" onSubmit={this.handleSubmit} >
-
                 <Button 
+                    onClick={this.handleSubmit} 
                     variant="outlined" 
                     size="small" 
                     style={buttonStyle}>
-                  Log In
+                      <Link to="/dashboard" >
+                        Log In
+                      </Link>
                 </Button>
-              
-            </Link>
-            
           </div>
         
       </div>
@@ -105,4 +79,9 @@ class SignInForm extends React.Component {
   }
 }
 
-export default SignInForm;
+const mapDispatchToProps = ( dispatch ) => {
+  return {
+    signIn: (creds) => { dispatch( signIn(creds) );}
+  }
+}
+export default connect(null, mapDispatchToProps)(SignInForm);
