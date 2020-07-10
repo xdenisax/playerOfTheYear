@@ -10,9 +10,16 @@ const SignedInLinks = (props) =>{
            <li><NavLink to="/" className="greenText">Games</NavLink></li>
            <li><NavLink to="/" className="greenText"> Matches</NavLink></li>
            <li onClick = {props.signOut}><NavLink to="/" className="greenText">Log out</NavLink> </li>
+           <li className="greenText disabled"> {props.profile.alias} </li>
        </ul>
     );
     
+}
+
+const mapStateToProps = ( state ) => {
+    return{
+        profile: state.firebase.profile
+    }
 }
 
 const mapDispatchToProps = (dispatch) =>{ 
@@ -21,4 +28,4 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
 
-export default connect(null, mapDispatchToProps) (SignedInLinks);
+export default connect(mapStateToProps, mapDispatchToProps) (SignedInLinks);

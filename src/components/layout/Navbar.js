@@ -15,8 +15,7 @@ const NavBar = () =>{
                 <SignedInLinks/>
             </div>
         </nav>
-    );
-    
+    );   
 }
 
 

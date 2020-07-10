@@ -19,10 +19,18 @@ const store = createStore( rootReducer,
   )
 );
 
+const profileSpecificProps = {
+  userProfile: 'users',
+  useFirestoreForProfile: true,
+  enableRedirectHandling: false,
+  resetBeforeLogin: false
+}
+
 const dbProps = {
   firebase,
   config: db,
   dispatch: store.dispatch,
+  config: profileSpecificProps,
   createFirestoreInstance
 }
 

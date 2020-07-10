@@ -1,11 +1,10 @@
 import 'tachyons';
 import './App.css';
-// import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 import React from 'react';
-import SignInButton from '../components/sign/SignInButton';
-import SignUpButton from '../components/sign/SignUpButton';
-import SignInForm from '../components/sign/SignInForm';
-import SignUpForm from '../components/sign/SignUpForm';
+import SignInButton from '../components/auth/SignInButton';
+import SignUpButton from '../components/auth/SignUpButton';
+import SignInForm from '../components/auth/SignInForm';
+import SignUpForm from '../components/auth/SignUpForm';
 
 class LandingPage extends React.Component{
     constructor(){

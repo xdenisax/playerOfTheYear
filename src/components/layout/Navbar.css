@@ -18,5 +18,8 @@
     box-shadow: none!important;
 }
 
+.disabled {
+    pointer-events:none; 
+}
 
   
