@@ -16,19 +16,6 @@ var buttonStyle= {
   "float":'left'
 }
 
-let validateEmail = (email) => {
-    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return email.match(re);
-}
-
-let validateLength = (input) => {
-  return input.length > 5;
-}
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
 class SignUpForm extends React.Component {
     constructor(){
         super();
@@ -37,73 +24,26 @@ class SignUpForm extends React.Component {
             email:"",
             password:"",
             confirmedPassword:"",
-
-          //   error:{
-          //     firstName: false,
-          //     email: false,
-          //     password: false,
-          //     confirmedPassword: false,
-          //     severity: "", 
-          //     snackbarMessage:""
-          // }
         }
     }
 
 
-    // validateInput = (e) => {
-    //   if(e.target.id === 'email' && !validateEmail(e.target.value)){
-    //     this.setState({error:{...this.state.error, email:true, snackbarMessage: 'Invalid email.', severity:"error"}});
-    //     return false;
-    //   }
-    
-    //   if(!validateLength(e.target.value)){
-    //     if(e.target.id === 'firstName'){
-    //       this.setState({error: {...this.state.error,  firstName:true, snackbarMessage: 'Name not long enough.', severity:"error"}});
-    //     }
-        
-    //     if(e.target.id === 'password'){
-    //       this.setState({error: {...this.state.error, password:true, snackbarMessage: 'Password not long enough.', severity:"error"}});
-    //     }
-        
-    //     if(e.target.id === 'confirmedPassword'){
-    //       this.setState({error: { ...this.state.error, confirmedPassword: true, snackbarMessage: 'Confirmation password not lon enough.', severity:"error"}});
-    //     }
-
-    //     return false;
-    //   }
-
-    //   if( e.target.id === 'confirmedPassword' && e.target.value !== this.state.password){
-    //     this.setState({error: {...this.state.error, confirmedPassword: true, snackbarMessage: "Passwords don't match", severity:"error"}});
-    //     return false;
-    //   }
-      
-    //   return true;
-    // }
-
     handleSubmit = (e) =>{
-      console.log(this.state);
+      e.preventDefault();
       this.props.signUp(this.state);
     }
 
     handleChange = (e) => {
-      // if( this.validateInput(e)){
         this.setState({
-          [e.target.id] : e.target.value,
-          // error: {
-          //   ...this.state.error,
-          //   [e.target.id]: false,
-          //   severity:"",
-          //   snackbarMessage:""
-          // }
+          [e.target.id] : e.target.value
         });
-      // }
     }
 
-  render (){
+  render(){
 
     const { auth, authError } = this.props;
     
-    if( auth.uid )
+    if( !auth.uid )
     return(
       <div className="flex flex-column items-end w-100 " >
         <div className="formInputs fl w-25 flex flex-column items-end ma6"> 
@@ -118,7 +58,6 @@ class SignUpForm extends React.Component {
                     label="alias"
                     type="text"
                     variant="outlined"
-                    // error={this.state.error.firstName}
                     onChange={(e) => this.handleChange(e)}/>
               </div>
 
@@ -128,7 +67,6 @@ class SignUpForm extends React.Component {
                     label="email"
                     type="email"
                     variant="outlined"
-                    // error={this.state.error.email}
                     onChange={(e) => this.handleChange(e)}/>
               </div>
 
@@ -138,7 +76,6 @@ class SignUpForm extends React.Component {
                     label="password"
                     type="password"
                     variant="outlined"
-                    // error={this.state.error.password}
                     onChange={(e) => this.handleChange(e)}/>
               </div>
 
@@ -148,7 +85,6 @@ class SignUpForm extends React.Component {
                     label="confirm password"
                     type="password"
                     variant="outlined"
-                    // error={this.state.error.confirmedPassword}
                     onChange={(e) => this.handleChange(e)}
                     />
               </div>
@@ -176,6 +112,7 @@ class SignUpForm extends React.Component {
         
       </div>
     );
+          
   }
 }
 

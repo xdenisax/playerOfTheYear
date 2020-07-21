@@ -14,13 +14,14 @@ class Dashboard extends Component{
         const { matches, auth } = this.props;
 
         if(!auth.uid) return <Redirect to ='/'/>
+            
         return(
             <div className="loggedInScreen">
                 <NavBar/>
                 <div className="loggedInCenterScreen">
                     <div className=" pa2 centerContainer container">
-                        <div className="flex flex-row items-start justify-between">
-                            <div className="max-height-100 overflow w-40">
+                        <div className="flex flex-row items-start justify-between" >
+                            <div className="overflow max-height-100 w-40">
                                 <MatchesList matches = {matches}  />
                             </div>
                             <div className="flex content-start w-40">
@@ -44,6 +45,6 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        { collection: 'matches' }
+        { collection: 'matches', limit: 10, orderBy: ['date', 'desc']}
     ])
  )(Dashboard);
