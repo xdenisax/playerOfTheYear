@@ -1,1 +1,0 @@
-export const REACT_APP_APIKEY = 'AIzaSyAiEaqAENsux7_3K2PjtdQZ9hkS8OBjh9c';
