@@ -1,9 +1,5 @@
 const initState = {
-    matches:[
-        {id: 1, game: "Catan", date: "10.02.2020", players: ['Denisa, Andrei, Nana'], winner: 'Nana'},
-        {id: 2, game: "Azul", date: "10.02.2020", players: ['Denisa, Andrei, Nana'], winner: 'Nana'},
-        {id: 3, game: "Monopoly", date: "10.02.2020", players: ['Denisa, Andrei, Nana'], winner: 'Nana'}
-    ]
+    matches:[] 
 }
 
 const matchReducer = (state = initState, action ) => {

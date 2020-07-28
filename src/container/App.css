@@ -16,7 +16,7 @@ html{
   
   overflow: hidden;
 
-  background-image: url("../images/logInBkg.jpg");
+  background-image: url("../assets/images/logInBkg.jpg");
   background-size: cover; 
   background-position: center center;
 

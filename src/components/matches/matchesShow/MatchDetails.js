@@ -1,6 +1,6 @@
 import React from 'react';
-import "../layout/Navbar.css";
-import "../../container/Fonts.css";
+import "../../layout/Navbar.css";
+import "../../../assets/Fonts.css";
 
 const MatchesDetails = ({match}) => {
 

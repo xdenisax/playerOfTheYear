@@ -1,10 +1,10 @@
 import 'tachyons';
-import './App.css';
+import '../../container/App.css';
 import React from 'react';
-import SignInButton from '../components/auth/SignInButton';
-import SignUpButton from '../components/auth/SignUpButton';
-import SignInForm from '../components/auth/SignInForm';
-import SignUpForm from '../components/auth/SignUpForm';
+import SignInButton from './SignInButton';
+import SignUpButton from './SignUpButton';
+import SignInForm from './SignInForm';
+import SignUpForm from './SignUpForm';
 
 class LandingPage extends React.Component{
     constructor(){

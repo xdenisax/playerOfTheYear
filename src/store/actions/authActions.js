@@ -1,3 +1,6 @@
+import { firestore } from "firebase";
+import { getFirestore } from "redux-firestore";
+
 export const signIn = (credentials) => {
     return (dispatch, getState, {getFirebase}) => {
         const firebase = getFirebase();
@@ -16,7 +19,6 @@ export const signIn = (credentials) => {
 export const signOut = () => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
-
         firebase.auth().signOut().then( () => {
             dispatch( {type: 'SIGNOUT_SUCCESS' });
         })
@@ -31,10 +33,10 @@ export const signUp = (newUser) => {
         firebase.auth().createUserWithEmailAndPassword(
             newUser.email,
             newUser.password
-        ).then( (response) => {
+        ).then( response => {
             return firestore.collection('users').doc(response.user.uid).set({
-                alias: newUser.alias,
-            })
+                alias: newUser.alias
+            });
         }).then( () => {
             dispatch({ type: 'SIGNUP_SUCCESS'});
         }).catch( (err) => {

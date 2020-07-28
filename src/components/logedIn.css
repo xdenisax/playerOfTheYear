@@ -2,7 +2,7 @@
 .loggedInScreen{
     overflow: hidden;
     background-color: #006d77;
-    background-image: url("../images/loggedInBkg.jpg");
+    background-image: url("../assets/images/loggedInBkg.jpg");
     background-size: cover; 
     background-position: center bottom;
     background-repeat: no-repeat;

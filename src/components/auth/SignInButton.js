@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Icon} from '@material-ui/core';
-import Beach from "../../images/beach.svg";
+import Beach from "../../assets/images/beach.svg";
 import 'tachyons';
 
 var buttonStyle={

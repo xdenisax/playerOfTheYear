@@ -1,8 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {TextField, Button, Snackbar} from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
-import { signIn, signUp } from '../../store/actions/authActions';
+import {TextField, Button} from '@material-ui/core';
+import { signUp } from '../../store/actions/authActions';
 import { connect } from 'react-redux';
 import 'tachyons';
 import "./SignUp.css"
@@ -41,9 +40,8 @@ class SignUpForm extends React.Component {
 
   render(){
 
-    const { auth, authError } = this.props;
+    const {  authError } = this.props;
     
-    if( !auth.uid )
     return(
       <div className="flex flex-column items-end w-100 " >
         <div className="formInputs fl w-25 flex flex-column items-end ma6"> 

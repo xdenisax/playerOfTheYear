@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import "./SignIn.css"
 import {TextField, Button} from '@material-ui/core';
 import 'tachyons';
@@ -22,7 +22,6 @@ class SignInForm extends React.Component {
     email : "", 
     password : ""
   }
-  
 
   handleChange = (e) => {
     this.setState({[e.target.id] : e.target.value});
@@ -34,8 +33,11 @@ class SignInForm extends React.Component {
   }
 
   render (){
+    const { authError, auth } = this.props;
+
+    if( auth.id ) return <Redirect to ="/dashboard"/>
+
     return(
-      
       <div className="formInputsStyle float-left fl w-25 flex flex-column items-start ma6 form ">
           
           <p className="ma1 f3 mb3 titleStyle"> Sign In </p>
@@ -64,16 +66,19 @@ class SignInForm extends React.Component {
           
           <div className="mt2 ml1" >
                 <Button 
-                    onClick={this.handleSubmit} 
+                    onClick={ this.handleSubmit } 
                     variant="outlined" 
                     size="small" 
-                    style={buttonStyle}>
-                      <Link to="/dashboard" >
-                        Log In
-                      </Link>
+                    style={ buttonStyle }>
+                      Log In
                 </Button>
           </div>
-        
+
+          {
+            authError
+            ? <p className="ma1 f3 mb4 red-text montSerrat"> {authError} </p> 
+            : ""
+          }
       </div>
     );
   }
@@ -84,4 +89,11 @@ const mapDispatchToProps = ( dispatch ) => {
     signIn: (creds) => { dispatch( signIn(creds) );}
   }
 }
-export default connect(null, mapDispatchToProps)(SignInForm);
+
+const mapStateToProps = ( state ) => { 
+  return{
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SignInForm);

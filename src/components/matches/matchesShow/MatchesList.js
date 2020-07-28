@@ -1,8 +1,6 @@
 import React from 'react';
 import MatchesDetails from "./MatchDetails.js";
 
-
-
 const MatchesList = ({matches}) => {
     return(
         <div className="matches-list " >

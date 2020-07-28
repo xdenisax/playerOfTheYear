@@ -7,7 +7,7 @@ import PlayersSelect from './PlayersSelect.js';
 import WinnerSelect from './WinnerSelect.js';
 
 import '../Matches.css'
-import '../../../container/Fonts.css';
+import '../../../assets/Fonts.css';
 
 var $ = require( "jquery" );
 

@@ -3,14 +3,9 @@ export const createMatch = (match) => {
         const firestore = getFirestore();
         const userID = getState().firebase.auth.uid;
 
-        console.log("(********);")
-                console.log(userID)
-
-
-        firestore.collection('matches')
-        .add({
+        firestore.collection('matches').add({
             ...match,
-            // addedBy: userID,
+            addedBy: userID,
             date: firestore.Timestamp.fromDate(new Date())
         })
         .then( () =>{

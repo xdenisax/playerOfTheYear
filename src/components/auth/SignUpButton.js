@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Icon} from '@material-ui/core';
-import Balloon from "../../images/balloon.svg";
+import Balloon from "../../assets/images/balloon.svg";
 
 const signUpButtonStyle ={ 
     "fontFamily": `'Montserrat', sans-serif`,
