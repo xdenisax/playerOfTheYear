@@ -8,6 +8,9 @@ export const createMatch = (match) => {
             addedBy: userID,
             date: firestore.Timestamp.fromDate(new Date())
         })
+        .then( () => {
+            return firestore.collection('stats').doc(match.winner)
+        })
         .then( () =>{
             dispatch({type: 'CREATE_MATCH', match: match});
         })

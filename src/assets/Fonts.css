@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200&family=Montserrat+Subrayada&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 
 .montSerrat {
     font-family: 'Montserrat', sans-serif;
@@ -13,4 +19,28 @@
 
 .dosis{
     font-family: 'Dosis', sans-serif;
+}
+
+.comfortaa{
+    font-family: 'Comfortaa', cursive;
+}
+
+.orbitron{
+    font-family: 'Orbitron', sans-serif;
+}
+
+.amatic{
+    font-family: 'Amatic SC', cursive;
+}
+
+.cinzel{
+    font-family: 'Cinzel', serif;
+}
+
+.elite{
+    font-family: 'Special Elite', cursive;
+}
+
+.poiret{
+    font-family: 'Poiret One', cursive;
 }

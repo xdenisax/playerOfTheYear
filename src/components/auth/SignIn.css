@@ -6,6 +6,15 @@
 .float-left{
     float: left;
 }
+
+.float-right{
+    float: right;
+}
+
+.label-right {
+    display: inline-block;
+    text-align: right;
+  }​
   
 .titleStyle{
     font-family: 'Montserrat', sans-serif;

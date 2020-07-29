@@ -28,7 +28,6 @@ export const store = createStore(
 
 export const rrfProps = {
     firebase,
-    config: db,
     config: profileSpecificProps,
     dispatch: store.dispatch,
     createFirestoreInstance

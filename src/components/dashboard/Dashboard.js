@@ -4,17 +4,18 @@ import Matches from '../matches/Matches.js';
 import Games from '../games/Games.js';
 import Profile from '../profile/Profile.js';
 import WelcomePage from '../welcomePage/WelcomePage.js'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../logedIn.css';
 import './Dashboard.css';
 
 class Dashboard extends Component{
     render(){
-        const { matches, auth } = this.props;
             
         return(
             <BrowserRouter>
+                <Redirect to= "/"/> 
+
                 <div className="loggedInScreen">
                     <NavBar/>
                     <div className="loggedInCenterScreen">

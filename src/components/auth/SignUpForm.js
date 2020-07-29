@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {TextField, Button} from '@material-ui/core';
 import { signUp } from '../../store/actions/authActions';
 import { connect } from 'react-redux';
@@ -44,7 +43,7 @@ class SignUpForm extends React.Component {
     
     return(
       <div className="flex flex-column items-end w-100 " >
-        <div className="formInputs fl w-25 flex flex-column items-end ma6"> 
+        <div className="formInputs fl w-25 flex flex-column items-end ma6 mt1"> 
         
             <p className="ma1 f3 mb4 titleStyle"> Registration </p>
 
@@ -89,7 +88,6 @@ class SignUpForm extends React.Component {
             </div>
             
             <div className="mt2 mr1 buttonWrapperStyle">
-              <Link to="/">
                 <Button 
                     onClick={this.handleSubmit}
                     variant="outlined" 
@@ -98,7 +96,6 @@ class SignUpForm extends React.Component {
                     >
                     Sign Up
                 </Button>
-              </Link>
             </div>
             
             {
