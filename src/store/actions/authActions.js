@@ -1,4 +1,9 @@
-
+export const passwordsCheckError = (password, confirmedPassword) =>{ 
+    return (dispatch) => {
+        if( password !== confirmedPassword )
+            dispatch( {type: 'PASSWORDS_MATCH_FAILED'});
+    } 
+}
 
 export const signIn = (credentials) => {
     return (dispatch, getState, {getFirebase}) => {
@@ -29,9 +34,17 @@ export const signUp = (newUser) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
 
-        firebase.auth().createUserWithEmailAndPassword(
-            newUser.email,
-            newUser.password
+        firestore.collection("users").where("alias", "==", newUser.alias).get()
+        .then( (snapshot) => {
+            snapshot.forEach( (doc) => {
+                if( doc.data().alias ) throw new Error("Alias already exists");
+            });
+        })
+        .then( () => {
+            return firebase.auth().createUserWithEmailAndPassword(
+                newUser.email,
+                newUser.password
+            )}
         ).then( response => {
             return firestore.collection('users').doc(response.user.uid).set({
                 alias: newUser.alias
@@ -41,5 +54,7 @@ export const signUp = (newUser) => {
         }).catch( (err) => {
             dispatch({ type: 'SIGNUP_ERROR', err});
         });
+
+        
     }
 }

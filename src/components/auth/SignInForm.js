@@ -2,7 +2,6 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions.js';
-// import {TextField, Button} from '@material-ui/core';
 import { TextInput, Button } from 'react-materialize';
 import "./SignIn.css"
 import 'tachyons';
@@ -44,40 +43,17 @@ class SignInForm extends React.Component {
           <p className="ma1 f3 mb3 titleStyle"> Sign In </p>
 
           <div className="w-100 inputsStyle" >
-            <div className="ma1">
-            <TextInput
-              id="email"
-              label="email"
-              type="email"
-              onChange={(e) => this.handleChange(e) }
-            />
-            </div>
-
-            <div className="ma1">
-              
-            <TextInput
-              id="password"
-              label="password"
-              type="password"
-              onChange={(e) => this.handleChange(e) }
-            />
-            </div>
+            <TextInput id="email" label="email" type="email" onChange={(e) => this.handleChange(e) } />
+            <TextInput id="password" label="password" type="password" onChange={(e) => this.handleChange(e) }/>
           </div>
           
-          <div className="mt2 ml1 montSerrat greenText" >
-            
-            <Button
-              style={ buttonStyle }
-              node="button"
-              waves="light"
-              onClick={ this.handleSubmit } >
-              Log In
-            </Button>
-          </div>
+          <Button style={ buttonStyle }node="button" waves="light" onClick={ this.handleSubmit } >
+            Log In
+          </Button>
 
           {
             authError
-            ? <p className="ma1 f3 mb4 red-text montSerrat"> {authError} </p> 
+            ? <p className="ma1 f4 mb4 red-text montSerrat"> {authError} </p> 
             : ""
           }
       </div>

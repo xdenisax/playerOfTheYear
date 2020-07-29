@@ -4,6 +4,13 @@ const initState = {
 
 const authReducer = (state = initState, action ) => {
     switch(action.type){
+        case 'PASSWORDS_MATCH_FAILED':
+            console.log('Matching passwords failed.')
+            return {
+                ...state,
+                authError: "Passwords don't match."
+            }
+
         case 'LOGIN_ERROR':
             console.log('logg in failed')
             return {
@@ -33,7 +40,6 @@ const authReducer = (state = initState, action ) => {
             }
 
         case 'SIGNUP_ERROR':
-            console.log("sign up failed");
             return{
                 ...state,
                 authError: action.err.message

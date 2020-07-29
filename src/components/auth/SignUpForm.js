@@ -1,6 +1,6 @@
 import React from 'react';
-import {TextField, Button} from '@material-ui/core';
-import { signUp } from '../../store/actions/authActions';
+import { TextInput, Button } from 'react-materialize';
+import { signUp, passwordsCheckError } from '../../store/actions/authActions';
 import { connect } from 'react-redux';
 import 'tachyons';
 import "./SignUp.css"
@@ -15,28 +15,34 @@ var buttonStyle= {
 }
 
 class SignUpForm extends React.Component {
-    constructor(){
-        super();
-        this.state = {
-            alias:"",
-            email:"",
-            password:"",
-            confirmedPassword:"",
-        }
+  state = {
+      alias:"",
+      email:"",
+      password:"",
+      confirmedPassword:"",
+  }
+
+  validation = () => { 
+    if( this.state.password !== this.state.confirmedPassword ) {
+      this.props.passwordsCheckError(this.state.password, this.state.confirmedPassword);
+      return false;
     }
 
+    return true;
+  }
 
-    handleSubmit = (e) =>{
-      e.preventDefault();
+  handleSubmit = (e) =>{
+    e.preventDefault();
+    if( this.validation() ){
       this.props.signUp(this.state);
     }
+  }
 
-    handleChange = (e) => {
-        this.setState({
-          [e.target.id] : e.target.value
-        });
-    }
+  handleChange = (e) => {
+      this.setState({ [e.target.id] : e.target.value });
+  }
 
+    
   render(){
 
     const {  authError } = this.props;
@@ -47,62 +53,23 @@ class SignUpForm extends React.Component {
         
             <p className="ma1 f3 mb4 titleStyle"> Registration </p>
 
-            <div className="w-100 flex flex-column items-end">
-              
-              <div className="ma1">
-                <TextField
-                    id="alias"
-                    label="alias"
-                    type="text"
-                    variant="outlined"
-                    onChange={(e) => this.handleChange(e)}/>
-              </div>
-
-              <div className="ma1">
-                <TextField
-                    id="email"
-                    label="email"
-                    type="email"
-                    variant="outlined"
-                    onChange={(e) => this.handleChange(e)}/>
-              </div>
-
-              <div className="ma1">
-                <TextField
-                    id="password"
-                    label="password"
-                    type="password"
-                    variant="outlined"
-                    onChange={(e) => this.handleChange(e)}/>
-              </div>
-
-              <div className="ma1">
-                <TextField
-                    id="confirmedPassword"
-                    label="confirm password"
-                    type="password"
-                    variant="outlined"
-                    onChange={(e) => this.handleChange(e)}
-                    />
-              </div>
+            <div className="w-100 inputsStyle">
+              <TextInput  id="alias" label="alias" type="text" onChange={(e) => this.handleChange(e) }/>
+              <TextInput  id="email" label="email" type="email" onChange={(e) => this.handleChange(e) }/> 
+              <TextInput id="password" label="password" type="password"  onChange={(e) => this.handleChange(e) } />
+              <TextInput  id="confirmedPassword"  label="confirmed password" type="password" onChange={(e) => this.handleChange(e) } />
             </div>
             
-            <div className="mt2 mr1 buttonWrapperStyle">
-                <Button 
-                    onClick={this.handleSubmit}
-                    variant="outlined" 
-                    size="small" 
-                    style={buttonStyle}
-                    >
-                    Sign Up
-                </Button>
-            </div>
+            <Button style={ buttonStyle } node="button" waves="light" onClick={ this.handleSubmit } >
+              Sign Up
+            </Button>
             
             {
               authError
-              ? <p className="ma1 f3 mb4 red-text montSerrat"> {authError} </p> 
+              ? <p className="ma1 f4 mb4 red-text montSerrat"> {authError} </p> 
               : ""
             }
+            
         </div>
         
       </div>
@@ -119,7 +86,8 @@ const mapStateToProps = ( state ) =>{
 }
 const mapDispathToProps = (dispatch) => {
   return{
-    signUp: (newUser) => { dispatch(signUp(newUser)); }
+    signUp: (newUser) => { dispatch(signUp(newUser)); },
+    passwordsCheckError: (password, confirmedPassword) => { dispatch( passwordsCheckError(password, confirmedPassword));}
   }
 }
 

@@ -24,7 +24,7 @@ class LandingPage extends React.Component{
     render(){
         return(
             <BrowserRouter>
-        
+
                 <div className="landingPageContainer">
                     <div className="imageBackground" >
                         <p to="/" className= "greenText poiret tc f1 mt5">The Playground</p>
