@@ -7,7 +7,7 @@ import "./SignIn.css"
 import 'tachyons';
 
 var buttonStyle = {
-  "fontFamilt": `'Montserrat', sans-serif`,
+  "fontFamily": `'Montserrat', sans-serif`,
   "fontSize": "1em",
   "color": "#006d77",
   "background":"none",
@@ -28,7 +28,6 @@ class SignInForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state)
     this.props.signIn(this.state);
   }
 
