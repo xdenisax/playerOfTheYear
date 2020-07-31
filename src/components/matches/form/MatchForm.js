@@ -8,6 +8,7 @@ import WinnerSelect from './WinnerSelect.js';
 
 import '../Matches.css'
 import '../../../assets/Fonts.css';
+import M from 'materialize-css';
 
 var $ = require( "jquery" );
 
@@ -31,7 +32,7 @@ class MatchForm extends Component{
     }
 
     render(){ 
-
+        const { match } = this.props;
         return(
             <div className="montSerrat greenText flex flex-column items-center ma2 mr3 br3 pa3 shadow-5 bw w-75">
                 <h4> Add match </h4>
@@ -44,9 +45,22 @@ class MatchForm extends Component{
                     onClick={this.handleSubmit} > 
                     Add match
                 </p>
-    
+                
+                {
+                    match.result 
+                    ? match.result === "Match added"
+                        ? <p className="b f5 dark-green-text mt3 montSerrat"> {match.result} </p> 
+                        : <p className="b f5 red-text mt3 montSerrat"> {match.result} </p> 
+                    :""
+                }
             </div>
         );
+    }
+}
+
+const mapStateToProps = ( state ) =>{ 
+    return{
+        match: state.match
     }
 }
 
@@ -56,4 +70,4 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
 
-export default connect(null, mapDispatchToProps) (MatchForm);
+export default connect(mapStateToProps, mapDispatchToProps) (MatchForm);

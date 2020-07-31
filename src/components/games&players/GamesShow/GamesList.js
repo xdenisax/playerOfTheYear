@@ -12,9 +12,11 @@ class GamesList extends React.Component{
             <div >
                 {
                     games
-                    ? games.map( (game) => {
-                        return( <GameDetails game ={ game } key ={game.id} />)
-                     })
+                    ? games.length > 0 
+                        ? games.map( (game) => {
+                            return( <GameDetails game ={ game } key ={game.id} />)
+                            })
+                        : <h4 className="montSerrat greenText ma2 pa1">No games added yet..</h4>
                     : <h4 className="montSerrat greenText ma2 pa1">No games added yet..</h4>
                 }
             </div>

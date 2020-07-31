@@ -10,7 +10,8 @@ const NavBar = (props) =>{
         
         <nav className="dt w-100 border-box no-shadows pa1 ph5-ns transparentBG">
             <div className="dtc v-mid link dim w-50">
-                <Link to="/" className= "greenText montSerrat big w2 h2 br-100"> <span>The Playground 🍍</span></Link>
+                <Link to="/" className= "greenText montSerrat big w2 h2 br-100"> <span>The Playground </span> </Link> 
+                <span  className= "big" role="img" aria-label="pineapple">🍍</span>
             </div>
 
             <div className="dtc v-mid w-75 tr ">

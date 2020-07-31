@@ -30,7 +30,7 @@ class GameForm extends React.Component{
         const { game } = this.props;
 
         return(
-            <div className="montSerrat greenText flex flex-column justify-center items-start ma2 mr3 br3 pa3 shadow-5 bw w-75">
+            <div className="bg-light-green montSerrat greenText flex flex-column justify-center items-start br3 pa3 shadow-5 bw w-75">
                 <h5> Add game </h5>
                 <TextInput
                     id="name"

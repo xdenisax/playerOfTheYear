@@ -34,7 +34,7 @@ class WinnerSelect extends Component {
                 multiple={false}
                 onChange={(e) => this.handleChange(e)}
                 options={ options }
-                defaultValue = "Winner">
+                defaultValue = "">
 
                 <option disabled value=""> Choose winner </option>
                 {

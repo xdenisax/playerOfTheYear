@@ -6,9 +6,11 @@ const MatchesList = ({matches}) => {
         <div className="matches-list " >
            {
             matches
-            ? matches.map(match => {
-                return (<MatchesDetails match = {match} key={match.id}/>)
-             })
+            ? matches.length > 0 
+                ? matches.map(match => {
+                    return (<MatchesDetails match = {match} key={match.id}/>)
+                    }) 
+                : <h4 className="montSerrat greenText ma2 pa1">No matches yet..</h4>
             : <h4 className="montSerrat greenText ma2 pa1">No matches yet..</h4>
             }
         </div>

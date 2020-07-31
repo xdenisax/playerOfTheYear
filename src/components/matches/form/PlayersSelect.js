@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {Select} from 'react-materialize';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 
 const options = {
@@ -20,8 +23,6 @@ const options = {
     }
 }
 
-const players = ["Denisa", "Andrei", "Nana", "Ioana", "Teo"];
-
 class PlayersSelect extends Component {
 
     handleChange = (event) =>{
@@ -29,6 +30,7 @@ class PlayersSelect extends Component {
     }
 
     render(){ 
+        const { players } = this.props; 
         return(
             <Select
                 id="players"
@@ -38,14 +40,27 @@ class PlayersSelect extends Component {
 
                 <option disabled value=""> Choose players </option>
                 {
-                    players.map((player, index) => {
-                        return(<option value={player} key={index}>{player}</option>);
-                    })
+                    players ?
+                        players.map((player, index) => {
+                            return(<option value={player.alias} key={index}>{player.alias}</option>);
+                        })
+                    :  <option disabled value="">  </option>
+
                 }
 
             </Select>
         );
     }
 }
+const mapStateToProps = (state) => { 
+    return {
+        players : state.firestore.ordered.users
+    }
+}
 
-export default PlayersSelect;
+export default compose(
+    connect(mapStateToProps), 
+    firestoreConnect([
+        { collection: 'users', orderBy: ['alias', 'asc']}
+    ]) 
+) (PlayersSelect);
