@@ -1,7 +1,7 @@
 ## The playground
-SPA built with the purpose of tracking board games matches, in order to see who is the player of the year. This application is a personal project, developed to track each player's performance and determine our mvp :)),  but also for me to better understand Redux. 
+SPA built with the purpose of tracking board games matches, in order to see who is the player of the year. This application is a personal project, developed to track each player's performance and determine our mvp :)),  but also for me to better understand *Redux*. 
 
-For this one, I used HTML, CSS, ReactJS, all this wrapped up in better visuals with the help of Materialize, Material UI and Tachyons. I used Cloud Firestore for the back-end and, at the same time, Firebase Authentication to manage new accounts.
+For this one, I used *HTML, CSS, ReactJS*, all this wrapped up in better visuals with the help of *Materialize, Material UI* and *Tachyons*. I used *Cloud Firestore* for the back-end and, at the same time, *Firebase Authentication* to manage new accounts.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
