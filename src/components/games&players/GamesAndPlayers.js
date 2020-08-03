@@ -11,12 +11,12 @@ const GamesAndPlayers = (props) => {
     if(!auth.uid) return <Redirect to="/"/>
     
     return(
-        <div className="overflow-y scroll flex flex-row items-start justify-between ma3" >
+        <div className="overflow-y scroll flex flex-row items-start justify-around ma3" >
             <div className="w-50">
                 <Players/>
             </div>
             <div className="w-50 ">
-                <h5 className="montSerrat greenText tc ">Games</h5>
+                <h5 className="cinzel b greenText tc ">Games</h5>
                 <div  className="flex flex-columns justify-around ">
                     <div className=" flex justify-end items-start">
                         <GameForm/>

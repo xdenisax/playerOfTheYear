@@ -3,7 +3,8 @@ import NavBar from '../layout/Navbar.js';
 import Matches from '../matches/Matches.js';
 import GamesAndPlayers from '../games&players/GamesAndPlayers.js';
 import Profile from '../profile/Profile.js';
-import WelcomePage from '../welcomePage/WelcomePage.js'
+import WelcomePage from '../welcomePage/WelcomePage.js';
+import Stats from '../stats/Stats.js';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../logedIn.css';
@@ -25,6 +26,7 @@ class Dashboard extends Component{
                                     <Route path="/matches" component={ Matches }/>
                                     <Route path="/games" component={ GamesAndPlayers }/>
                                     <Route path="/profile" component= { Profile }/>
+                                    <Route path="/stats" component= { Stats }/>
                                 </Switch>
                         </div>
                     </div>
