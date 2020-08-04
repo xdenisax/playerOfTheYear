@@ -16,7 +16,7 @@ class Players extends React.Component{
                         players
                         ? players.length > 0 
                             ? players.map( (player) => {
-                                return( <div className="w-50" key ={player.id}><PlayerDetails player ={ player }  /></div>)
+                                return( <div className="w-50" key ={player.alias}><PlayerDetails player ={ player }  /></div>)
                                 })
                             : <h5 className="montSerrat greenText ma2 pa1">No players joined yet..</h5>
                         : <h5 className="montSerrat greenText ma2 pa1">No players joined yet..</h5>

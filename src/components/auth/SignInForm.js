@@ -34,7 +34,8 @@ class SignInForm extends React.Component {
   render (){
     const { authError, auth } = this.props;
 
-    if( auth.id ) return <Redirect to ="/"/>
+    if( auth.uid && !auth.verifiedEmail ) return <Redirect to="/verifyEmail"/>
+    if( auth.uid && auth.verifiedEmail ) return <Redirect to ="/"/>
 
     return(
       <div className="formInputsStyle fl w-20 flex flex-column items-start ml5 form ">

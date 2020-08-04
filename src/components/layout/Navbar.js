@@ -7,7 +7,6 @@ import '../../assets/Fonts.css'
 
 const NavBar = (props) =>{
     return(
-        
         <nav className="dt w-100 border-box no-shadows pa1 ph5-ns transparentBG">
             <div className="dtc v-mid link dim w-40">
                 <Link to="/" className= " pink-dark-text montSerrat big w2 h2 br-100"> <span>The Playground </span> </Link> 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { TextInput, Button } from 'react-materialize';
 import { signUp, passwordsCheckError } from '../../store/actions/authActions';
 import { connect } from 'react-redux';
@@ -45,7 +46,9 @@ class SignUpForm extends React.Component {
     
   render(){
 
-    const {  authError } = this.props;
+    const {  authError, auth } = this.props;
+
+    if(auth.uid && !auth.verifiedEmail) return <Redirect to="/verifyEmail"/>
     
     return(
       <div className="flex flex-column items-end w-100 " >

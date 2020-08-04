@@ -5,6 +5,20 @@ export const passwordsCheckError = (password, confirmedPassword) =>{
     } 
 }
 
+export const updatePassword = (newPassword, newConfirmedPassword) => {
+    return ( dispatch, getState, { getFirebase } ) =>{
+        const firebase = getFirebase();
+        const email = getState().firebase.auth.email;
+
+        firebase.auth().sendPasswordResetEmail(email)
+        .then( () => {
+            dispatch( {type: 'PASSWORD_UPDATED'});
+        }).catch( (err) => {
+            dispatch( {type: 'PASSWORD_UPDATE_ERROR', err: err });
+        });
+    }
+}
+
 export const signIn = (credentials) => {
     return (dispatch, getState, {getFirebase}) => {
         const firebase = getFirebase();
@@ -45,12 +59,17 @@ export const signUp = (newUser) => {
                 newUser.email,
                 newUser.password
             )}
-        ).then( response => {
+        )
+        .then( response => {
             return firestore.collection('users').doc(response.user.uid).set({
                 alias: newUser.alias, 
                 email: newUser.email
             });
-        }).then( () => {
+        })
+        .then( () => {
+            return firebase.auth().currentUser.sendEmailVerification()
+        })
+        .then( () => {
             dispatch({ type: 'SIGNUP_SUCCESS'});
         }).catch( (err) => {
             dispatch({ type: 'SIGNUP_ERROR', err});

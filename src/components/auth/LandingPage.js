@@ -8,6 +8,7 @@ import SignInButton from './SignInButton';
 import SignUpButton from './SignUpButton';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
+import VerifyEmail from './VerifyEmail.js';
 
 class LandingPage extends React.Component{
     constructor(){
@@ -32,6 +33,7 @@ class LandingPage extends React.Component{
                             <Switch>
                                 <Route path="/signin" exact component={ SignInForm }/>
                                 <Route path="/signup" component={ SignUpForm }/>
+                                <Route path="/verifyEmail" component = { VerifyEmail }/>
                             </Switch>
                         </div>
                     </div>

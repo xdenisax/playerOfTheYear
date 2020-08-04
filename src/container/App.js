@@ -9,7 +9,7 @@ class App extends React.Component {
     const { auth } = this.props;
 
     return(
-      auth.uid 
+      auth.uid && auth.emailVerified
       ? <Dashboard/>
       : <LandingPage/>  
     );
