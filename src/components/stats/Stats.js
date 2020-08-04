@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import StatsShow from './StatsShow.js';
 
 const sortMap = (map) =>{
    return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
@@ -12,6 +13,7 @@ class Stats extends React.Component{
         const { matches } = this.props;
         var winsForEachPlayer = new Map();
         var matchesPlayedByEachPlayer = new Map();
+        var playersPerformance = new Map();
         var gamesFrequency = new Map();
         
         if(matches){
@@ -23,25 +25,26 @@ class Stats extends React.Component{
                 });
                 matchesPlayedByEachPlayer = sortMap(matchesPlayedByEachPlayer);
 
-                gamesFrequency.has(gamesFrequency) ? gamesFrequency.set(match.game, gamesFrequency.get(match.game)+1) : gamesFrequency.set(match.game,1);
-            });    
+                gamesFrequency.has(match.game) ? gamesFrequency.set(match.game, gamesFrequency.get(match.game)+1) : gamesFrequency.set(match.game,1);
+                gamesFrequency = sortMap(gamesFrequency);
+            }); 
+            
+            Array.from(winsForEachPlayer).forEach ( ([key, value]) => {
+                playersPerformance.set(key, ( winsForEachPlayer.get(key) / matchesPlayedByEachPlayer.get(key)*100 ).toFixed(1) );
+            })
+            playersPerformance = sortMap(playersPerformance);
         }
 
         return(
-            <div className="flex flex-row justify-around">
-                <div  className="bg-transparent br3 pa3 pt1 ma2 grow shadow-5 bw">
-                    <h5 className="montSerrat greenText tl">Top players</h5>
-                    <p className="poiret  black-text tl" >(by won games)</p>
-                    {
-                        winsForEachPlayer
-                        ? Array.from(winsForEachPlayer).map( ([key, value], index) => {
-                            return <p className="poiret b black-text tl" key={index}>{`${index + 1}. ${key} - ${value} `}</p>
-                          })
-                        :<p className="dosis black-text tl">No values</p>  
-                    }
+            <div className="flex flex-column">
+                <p className= "pink-dark-text montSerrat big h2 ">Statistics</p>
+                <div className="flex flex-row justify-around">
+                    <StatsShow title={"Top players"} subtitle={"(by won matches)"} map= {winsForEachPlayer}/>
+                    <StatsShow title={"Top players"} subtitle={"(by number of played matches)"} map= {matchesPlayedByEachPlayer}/>
+                    <StatsShow title={"Top players"} subtitle={"(by perfomance, % won games)"} map= {playersPerformance}/>
+                    <StatsShow title={"Top games"} subtitle={"(by number of played matches)"} map= {gamesFrequency}/>
                 </div>
-            </div>
-            
+            </div> 
         );
     }
 }

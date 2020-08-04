@@ -20,7 +20,7 @@ class Dashboard extends Component{
                 <div className="loggedInScreen">
                     <NavBar/>
                     <div className="loggedInCenterScreen">
-                        <div className=" pa2 centerContainer greenText">
+                        <div className=" centerContainer greenText ">
                                 <Switch>
                                     <Route path="/" exact component={ WelcomePage }/>
                                     <Route path="/matches" component={ Matches }/>

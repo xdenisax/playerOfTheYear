@@ -35,7 +35,7 @@ class MatchForm extends Component{
         const { match } = this.props;
         return(
             <div className="montSerrat greenText flex flex-column items-center ma2 mr3 br3 pa3 shadow-5 bw w-75">
-                <h4> Add match </h4>
+                <h4 className= "pink-dark-text "> Add match </h4>
 
                 <GameSelect handleChange = {this.handleChange}/>
                 <PlayersSelect handleChange = {this.handleChange}/>

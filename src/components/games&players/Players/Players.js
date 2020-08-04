@@ -10,7 +10,7 @@ class Players extends React.Component{
         
         return(
             <div>
-                <h5 className="cinzel b greenText tc">Players</h5>
+                <h5 className="montSerrat greenText tc">Players</h5>
                 <div className="flex flex-row flex-wrap">
                     {
                         players

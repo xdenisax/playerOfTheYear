@@ -16,7 +16,7 @@ const GamesAndPlayers = (props) => {
                 <Players/>
             </div>
             <div className="w-50 ">
-                <h5 className="cinzel b greenText tc ">Games</h5>
+                <h5 className="montSerrat greenText tc ">Games</h5>
                 <div  className="flex flex-columns justify-around ">
                     <div className=" flex justify-end items-start">
                         <GameForm/>
