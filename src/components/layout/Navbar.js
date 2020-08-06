@@ -15,7 +15,7 @@ const NavBar = (props) =>{
 
             <div className="dtc v-mid w-60 tr ">
                 <ul  className="right">
-                    <li><NavLink to="/games" className="greenText">Games</NavLink></li>
+                    <li><NavLink to="/games" className="greenText">Games and Players</NavLink></li>
                     <li><NavLink to="/matches" className="greenText"> Matches</NavLink></li>
                     <li><NavLink to="/stats" className="greenText"> Statistics</NavLink></li>
                     <li> <NavLink to="/profile" className="pink-dark-text b poiret">{ props.profile.alias }</NavLink></li>

@@ -15,13 +15,13 @@ const GamesAndPlayers = (props) => {
             <div className="w-50">
                 <Players/>
             </div>
-            <div className="w-50 ">
-                <h5 className="montSerrat greenText tc ">Games</h5>
-                <div  className="flex flex-columns justify-around ">
+            <div className="w-50 flex flex-column" style={{}}>
+                <h5 className="montSerrat greenText tc fw6">Games</h5>
+                <div  className="flex flex-columns justify-around " >
                     <div className=" flex justify-end items-start">
                         <GameForm/>
                     </div>
-                    <div>
+                    <div className="w-50 flex flex-column" style={{"overflow-y" : "scroll", "maxHeight" : "70vh" }}>
                         <GamesList/>
                     </div>
                 </div>

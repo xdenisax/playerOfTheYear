@@ -5,7 +5,7 @@ export const passwordsCheckError = (password, confirmedPassword) =>{
     } 
 }
 
-export const updatePassword = (newPassword, newConfirmedPassword) => {
+export const updatePassword = () => {
     return ( dispatch, getState, { getFirebase } ) =>{
         const firebase = getFirebase();
         const email = getState().firebase.auth.email;

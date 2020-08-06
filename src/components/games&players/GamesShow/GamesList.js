@@ -9,7 +9,7 @@ class GamesList extends React.Component{
         const { games } = this.props;
         
         return(
-            <div >
+            <div>
                 {
                     games
                     ? games.length > 0 
