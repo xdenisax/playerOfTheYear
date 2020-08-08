@@ -10,8 +10,8 @@ class Players extends React.Component{
         
         return(
             <div>
-                <h5 className="montSerrat greenText tc">Players</h5>
-                <div className="flex flex-row flex-wrap">
+                <h5 className="montSerrat greenText fw6 tc">Players</h5>
+                <div className="flex flex-row flex-wrap y-scroll">
                     {
                         players
                         ? players.length > 0 

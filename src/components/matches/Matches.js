@@ -11,7 +11,7 @@ class Matches extends Component{
             
         return(
             <div className="flex flex-row items-start justify-between" >
-                <div className="overflow max-height-100 w-40">
+                <div className="overflow max-height-100 w-40 y-scroll">
                     <MatchesList matches = {matches}  />
                 </div>
                 <div className="flex content-start w-40">
