@@ -3,6 +3,7 @@ import { TextInput, Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import { createGame } from '../../../store/actions/gamesActions.js'
 import '../../../assets/Colors.css'
+const axios = require('axios');
 
 var buttonStyle = {
     "fontFamily": `'Montserrat', sans-serif`,
@@ -15,6 +16,16 @@ var buttonStyle = {
 class GameForm extends React.Component{
     state = { 
         name:""
+    }
+
+    handleRandom = (event) => {
+        event.preventDefault();
+        axios.get(`https://api.boardgameatlas.com/api/lists?username=trentellingsen&client_id=JLBr5npPhV`)
+        .then(res => {
+            let randomNumber =  Math.floor(Math.random() * res.data.lists.length);
+            this.setState({name: res.data.lists[randomNumber].name});
+            this.props.createGame(this.state);
+        });
     }
 
     handleInputChange = (event) =>{
@@ -39,6 +50,9 @@ class GameForm extends React.Component{
                 />
                 <Button style={ buttonStyle } node="button" waves="light" onClick={  this.handleSubmit } >
                     Add game
+                </Button>
+                <Button style={ buttonStyle } node="button" waves="light" onClick={  this.handleRandom } >
+                    Random game
                 </Button>
 
                 {
