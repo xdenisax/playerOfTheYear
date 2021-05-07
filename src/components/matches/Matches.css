@@ -26,3 +26,12 @@ ul.dropdown-content.select-dropdown li span {
 .btn-small:hover{
     background-color: rgba(215,192,208,0.5);
 }
+
+.y-scroll{
+    overflow-y : auto;
+    max-height : 70vh;
+}
+.break-word{
+    word-break: break-all;
+}
+
